@@ -42,6 +42,16 @@ export default function Usuarios(){
         const data = resultado.json()
         console.log(data);
         buscarUsuarios()
+        setModal(false)
+    }
+
+    const deletar = async (usuario) => {
+        const resultado = await fetch(`http://localhost:3000/usuarios/${usuario.id}`, {
+            method: 'DELETE'
+        })
+        const data = resultado.json()
+        console.log(data);
+        buscarUsuarios()
     }
 
     return (
@@ -61,6 +71,7 @@ export default function Usuarios(){
                         STATUS: { usuario.ativo ? 'Ativo' : 'Desativo' }
                         <br />
                         <button onClick={() => editar(usuario)}>Editar</button>
+                        <button onClick={() => deletar(usuario)}>deletar</button>
                     </li>
                 ))}
 
